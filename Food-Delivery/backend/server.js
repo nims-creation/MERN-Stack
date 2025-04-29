@@ -6,14 +6,19 @@ import userRouter from "./routes/userRoute.js";
 import "dotenv/config";
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
+import twoFactorRouter from "./routes/twoFactorRoute.js";
+import { apiLimiter } from "./middleware/rateLimiter.js";
 
 // app config
 const app = express();
-const port =process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 
 //middlewares
 app.use(express.json());
 app.use(cors());
+
+// Apply rate limiting to all requests
+app.use(apiLimiter);
 
 // DB connection
 connectDB();
@@ -24,6 +29,7 @@ app.use("/images", express.static("uploads"));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
+app.use("/api/2fa", twoFactorRouter);
 
 app.get("/", (req, res) => {
   res.send("API Working");

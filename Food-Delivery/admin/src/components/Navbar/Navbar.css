@@ -10,6 +10,50 @@
 .navbar .profile{
     width: 40px;
 }
-.login-conditon{
+.login-condition{
     font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    margin: 0;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.security-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.security-link:hover {
+    background-color: #e9ecef;
+}
+
+.security-icon {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .security-link span {
+        display: none;
+    }
+    
+    .security-link {
+        padding: 6px;
+    }
+    
+    .navbar-actions {
+        gap: 10px;
+    }
 }

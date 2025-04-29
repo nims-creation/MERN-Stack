@@ -1,0 +1,267 @@
+/* TwoFactor Setup Styles */
+.twofactor-setup-container, 
+.twofactor-verify-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.twofactor-setup-container h2,
+.twofactor-verify-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.twofactor-setup-container p,
+.twofactor-verify-container p {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Setup Steps */
+.setup-steps {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.setup-steps h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.setup-steps ol {
+  margin-left: 20px;
+}
+
+.setup-steps li {
+  margin-bottom: 8px;
+}
+
+/* Buttons */
+.setup-button,
+.verify-button, 
+.back-button, 
+.download-button,
+.switch-method-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 5px;
+}
+
+.setup-button, 
+.verify-button {
+  background-color: tomato;
+  color: white;
+  width: 100%;
+}
+
+.setup-button:hover:not(:disabled), 
+.verify-button:hover:not(:disabled) {
+  background-color: #e0452d;
+}
+
+.back-button,
+.switch-method-button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.back-button:hover:not(:disabled),
+.switch-method-button:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+.download-button {
+  background-color: #4caf50;
+  color: white;
+  display: block;
+  margin: 15px auto;
+}
+
+.download-button:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.setup-button:disabled, 
+.verify-button:disabled, 
+.back-button:disabled,
+.download-button:disabled,
+.switch-method-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* QR Code Stage */
+.qrcode-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.qrcode-container img {
+  max-width: 200px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background: white;
+}
+
+.secret-key {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.secret-key code {
+  display: block;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #eff0f1;
+  border-radius: 3px;
+  font-family: monospace;
+  word-break: break-all;
+}
+
+/* Verification Input */
+.verification-input,
+.verification-code-input,
+.backup-code-input {
+  margin: 20px 0;
+}
+
+.verification-input label,
+.verification-code-input label,
+.backup-code-input label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.verification-input input,
+.verification-code-input input,
+.backup-code-input input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.verification-actions,
+.twofactor-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Success Stage */
+.backup-codes {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.backup-codes h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.backup-codes-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.backup-codes-list li {
+  padding: 8px;
+  background-color: #eff0f1;
+  border-radius: 3px;
+  font-family: monospace;
+  text-align: center;
+}
+
+.setup-complete {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+  color: #856404;
+  border-radius: 0 5px 5px 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .twofactor-setup-container,
+  .twofactor-verify-container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .backup-codes-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .verification-actions,
+  .twofactor-actions {
+    flex-direction: column;
+  }
+  
+  .verification-actions button,
+  .twofactor-actions button {
+    margin: 5px 0;
+  }
+}
+
+/* Network Error Styling */
+.network-error {
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.retry-button {
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.retry-button:hover {
+  background-color: #e0a800;
+} 

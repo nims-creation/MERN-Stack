@@ -17,7 +17,6 @@
     border-radius: 8px;
     font-size: 14px;
     animation: fadeIn 0.5s;
-
 }
 .login-popup-title{
     display: flex;
@@ -35,6 +34,7 @@
     border: 1px solid #c9c9c9;
     padding: 10px;
     border-radius: 4px;
+    width: 100%;
 }
 .login-popup-container button{
     border: none;
@@ -44,6 +44,103 @@
     background-color: tomato;
     font-size: 15px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button and input states */
+.login-popup-container button:hover:not(:disabled) {
+    background-color: #e0452d;
+}
+
+.login-popup-container button:disabled {
+    background-color: #ffa599;
+    cursor: not-allowed;
+}
+
+.button-loading {
+    position: relative;
+}
+
+.button-loading:after {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* Input group and validation styling */
+.input-group {
+    width: 100%;
+    position: relative;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.input-error {
+    border-color: #e74c3c !important;
+}
+
+/* Password input container */
+.password-input-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: none;
+    border: none;
+    color: #808080;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.password-toggle-btn:hover {
+    color: #333;
+    background: none;
+}
+
+/* Remember me checkbox styling */
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.remember-me input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+.remember-me label {
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Animation for loading spinner and fade-in effect */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width:650px) {
@@ -58,4 +155,60 @@
     .login-popup-title{
         justify-content: center;
     }
+}
+
+/* Login options (remember me and forgot password) */
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.forgot-password {
+    font-size: 13px;
+}
+
+.form-link {
+    color: #c34232;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.form-link:hover {
+    color: #e0452d;
+    text-decoration: underline;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* Password reset success and instructions */
+.forgot-password-success,
+.reset-password-success,
+.forgot-password-instructions,
+.reset-password-instructions {
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.back-to-login-btn {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: tomato;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.back-to-login-btn:hover {
+    background-color: #e0452d;
 }
