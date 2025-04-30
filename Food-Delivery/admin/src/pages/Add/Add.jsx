@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import "./Add.css";
 import { assets } from "../../assets/assets";
 import axios from "axios";
@@ -53,7 +54,7 @@ const Add = ({url}) => {
       toast.error("Please Login First");
        navigate("/");
     }
-  },[])
+  },[admin, token, navigate])
   return (
     <div className="add">
       <form onSubmit={onSubmitHandler} className="flex-col">
@@ -132,6 +133,9 @@ const Add = ({url}) => {
       </form>
     </div>
   );
+};
+Add.propTypes = {
+  url: PropTypes.string.isRequired,
 };
 
 export default Add;

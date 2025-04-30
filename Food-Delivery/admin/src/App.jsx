@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
+import PropTypes from "prop-types";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { Route, Routes, Navigate } from "react-router-dom";
@@ -20,8 +21,12 @@ const ProtectedRoute = ({ children }) => {
   if (!admin || !token) {
     return <Navigate to="/login" replace />;
   }
-  
+
   return children;
+};
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 // Auth layout without sidebar and navbar
@@ -31,6 +36,10 @@ const AuthLayout = ({ children }) => {
       {children}
     </div>
   );
+};
+
+AuthLayout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 const App = () => {

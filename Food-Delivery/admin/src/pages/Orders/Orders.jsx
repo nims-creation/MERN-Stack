@@ -1,6 +1,5 @@
-import React from "react";
 import "./Orders.css";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
@@ -8,20 +7,21 @@ import { assets } from "../../assets/assets";
 import { useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Orders = ({ url }) => {
   const navigate = useNavigate();
   const { token, admin } = useContext(StoreContext);
   const [orders, setOrders] = useState([]);
 
-  const fetchAllOrder = async () => {
+  const fetchAllOrder = useCallback(async () => {
     const response = await axios.get(url + "/api/order/list", {
       headers: { token },
     });
     if (response.data.success) {
       setOrders(response.data.data);
     }
-  };
+  }, [url, token]);
 
   const statusHandler = async (event, orderId) => {
     const response = await axios.post(
@@ -45,7 +45,7 @@ const Orders = ({ url }) => {
       navigate("/");
     }
     fetchAllOrder();
-  }, []);
+  }, [admin, token, navigate, fetchAllOrder]);
 
   return (
     <div className="order add">
@@ -88,7 +88,7 @@ const Orders = ({ url }) => {
               value={order.status}
             >
               <option value="Food Processing">Food Processing</option>
-              <option value="Out for delivery">Out for delivery</option>
+              <option value="Out for delivery">Out for Delivery</option>
               <option value="Delivered">Delivered</option>
             </select>
           </div>
@@ -96,6 +96,9 @@ const Orders = ({ url }) => {
       </div>
     </div>
   );
+};
+Orders.propTypes = {
+  url: PropTypes.string.isRequired,
 };
 
 export default Orders;

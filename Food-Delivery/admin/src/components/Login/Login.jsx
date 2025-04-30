@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate, Link } from "react-router-dom";
 import TwoFactorVerify from "../TwoFactor/TwoFactorVerify";
+import PropTypes from "prop-types";
 
 const Login = ({ url }) => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const Login = ({ url }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [inputFocus, setInputFocus] = useState(null);
   
   // 2FA state
   const [requiresTwoFactor, setRequiresTwoFactor] = useState(false);
@@ -103,7 +105,7 @@ const Login = ({ url }) => {
         } else {
           // Regular login without 2FA
           if (response.data.role === "admin") {
-            handleSuccessfulLogin(response.data.token, response.data.role);
+            handleSuccessfulLogin(response.data.token);
           } else {
             toast.error("You are not authorized as an admin");
           }
@@ -130,7 +132,7 @@ const Login = ({ url }) => {
   };
   
   // Handle successful login after credentials and optional 2FA
-  const handleSuccessfulLogin = (token, role) => {
+  const handleSuccessfulLogin = (token) => {
     setToken(token);
     setAdmin(true);
     
@@ -171,6 +173,15 @@ const Login = ({ url }) => {
     setShowPassword(!showPassword);
   };
   
+  // Handle input focus for animation effects
+  const handleFocus = (field) => {
+    setInputFocus(field);
+  };
+  
+  const handleBlur = () => {
+    setInputFocus(null);
+  };
+  
   // If 2FA verification is required, show 2FA component
   if (requiresTwoFactor) {
     return (
@@ -191,36 +202,43 @@ const Login = ({ url }) => {
         </div>
         
         <div className="login-popup-inputs">
-          {/* Email input with validation */}
-          <div className="input-group">
+          {/* Email input with animation and validation */}
+          <div className={`input-group ${inputFocus === 'email' ? 'focused' : ''}`}>
             <input
               name="email"
               onChange={onChangeHandler}
               value={data.email}
               type="email"
-              placeholder="Your email"
+              placeholder="Email Address"
               className={errors.email ? "input-error" : ""}
               disabled={isLoading}
+              onFocus={() => handleFocus('email')}
+              onBlur={handleBlur}
+              autoComplete="email"
             />
             {errors.email && <div className="error-message">{errors.email}</div>}
           </div>
           
-          {/* Password input with visibility toggle */}
-          <div className="input-group">
+          {/* Password input with visibility toggle and animation */}
+          <div className={`input-group ${inputFocus === 'password' ? 'focused' : ''}`}>
             <div className="password-input-container">
               <input
                 name="password"
                 onChange={onChangeHandler}
                 value={data.password}
                 type={showPassword ? "text" : "password"}
-                placeholder="Your password"
+                placeholder="Password"
                 className={errors.password ? "input-error" : ""}
                 disabled={isLoading}
+                onFocus={() => handleFocus('password')}
+                onBlur={handleBlur}
+                autoComplete="current-password"
               />
               <button 
                 type="button" 
                 className="password-toggle-btn"
                 onClick={togglePasswordVisibility}
+                tabIndex="-1"
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
@@ -228,7 +246,7 @@ const Login = ({ url }) => {
             {errors.password && <div className="error-message">{errors.password}</div>}
           </div>
           
-          {/* Remember me and forgot password row */}
+          {/* Remember me and forgot password row with enhanced styling */}
           <div className="login-options">
             <div className="remember-me">
               <input
@@ -249,13 +267,22 @@ const Login = ({ url }) => {
           </div>
         </div>
         
-        {/* Submit button with loading state */}
-        <button type="submit" disabled={isLoading} className={isLoading ? "button-loading" : ""}>
+        {/* Submit button with loading state and enhanced animation */}
+        <button 
+          type="submit" 
+          disabled={isLoading} 
+          className={isLoading ? "button-loading" : ""}
+        >
           {isLoading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
   );
+};
+
+// Add PropTypes validation at the bottom of the file
+Login.propTypes = {
+  url: PropTypes.string.isRequired
 };
 
 export default Login;

@@ -1,4 +1,4 @@
-import React from "react";
+// Removed unused React import
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
